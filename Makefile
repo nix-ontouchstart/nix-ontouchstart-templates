@@ -1,6 +1,6 @@
 all:	metadata run
 
-templates: flake.nix bash-hello c-hello compat devshell dotnet full rust
+templates: flake.nix bash-hello c-hello compat devshell dotnet full rust rust-web-server
 	nix flake show templates
 
 flake.nix:
@@ -16,6 +16,7 @@ metadata: templates
 	nix flake metadata ./dotnet
 	nix flake metadata ./full
 	nix flake metadata ./rust
+	nix flake metadata ./rust-web-server
 
 run: metadata
 	nix run ./bash-hello
@@ -50,5 +51,9 @@ rust:
 	nix flake new --template templates#rust rust
 	nix flake show ./rust
 
+rust-web-server:
+	nix flake new --template templates#rust-web-server rust-web-server
+	nix flake show ./rust-web-server
+
 clean:
-	rm -rf flake.nix bash-hello c-hello compat devShell dotnet full
+	rm -rf flake.nix bash-hello c-hello compat devShell dotnet full rust rust-web-server

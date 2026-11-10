@@ -1,0 +1,40 @@
+{
+  "nodes": {
+    "import-cargo": {
+      "locked": {
+        "lastModified": 1594305518,
+        "narHash": "sha256-frtArgN42rSaEcEOYWg8sVPMUK+Zgch3c+wejcpX3DY=",
+        "owner": "edolstra",
+        "repo": "import-cargo",
+        "rev": "25d40be4a73d40a2572e0cc233b83253554f06c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "import-cargo",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1794165970,
+        "narHash": "sha256-YqwBRaXgqn0+I8BCsZVLkzd746X/84fr1/FvZiocsYE=",
+        "rev": "ac588ef1c914865dad517b337ea0eb9694a4021c",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.13936.ac588ef1c914/nixexprs.tar.zst"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst"
+      }
+    },
+    "root": {
+      "inputs": {
+        "import-cargo": "import-cargo",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
