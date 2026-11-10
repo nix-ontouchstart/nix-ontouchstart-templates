@@ -1,6 +1,6 @@
 all:	metadata run
 
-templates: flake.nix bash-hello c-hello compat devshell
+templates: flake.nix bash-hello c-hello compat devshell dotnet
 	nix flake show templates
 
 flake.nix:
@@ -12,6 +12,8 @@ metadata: templates
 	nix flake metadata ./bash-hello
 	nix flake metadata ./c-hello
 	nix flake metadata ./compat
+	nix flake metadata ./devshell
+	nix flake metadata ./dotnet
 
 run: metadata
 	nix run ./bash-hello
@@ -34,5 +36,9 @@ devshell:
 	nix flake new --template templates#devshell devshell
 	nix flake show ./devshell
 
+dotnet:
+	nix flake new --template templates#dotnet dotnet
+	nix flake show ./dotnet
+
 clean:
-	rm -rf flake.nix bash-hello c-hello compat devShell
+	rm -rf flake.nix bash-hello c-hello compat devShell dotnet
