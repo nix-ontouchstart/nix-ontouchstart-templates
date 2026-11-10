@@ -23,6 +23,7 @@ run: metadata
 	nix run ./bash-hello
 	nix run ./c-hello
 	nix develop ./devshell --command hello
+	cd python && nix develop --command poetry run python -m sample_package
 
 bash-hello:
 	nix flake new --template templates#bash-hello bash-hello
