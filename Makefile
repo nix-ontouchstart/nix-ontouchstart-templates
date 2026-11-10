@@ -1,35 +1,37 @@
-all:	flakes templates metadata run
+all:	metadata run
 
-flakes:	flake.nix bash-hello/flake.nix c-hello/flake.nix compat/flake.nix
-
-templates:
+templates: flake.nix bash-hello c-hello compat devshell
 	nix flake show templates
 
 flake.nix:
 	nix flake init --template templates#empty
 	nix flake show
 
-metadata: flake.nix bash-hello/flake.nix c-hello/flake.nix
+metadata: templates
 	nix flake metadata 
 	nix flake metadata ./bash-hello
 	nix flake metadata ./c-hello
 	nix flake metadata ./compat
 
-run: bash-hello/flake.nix
+run: metadata
 	nix run ./bash-hello
 	nix run ./c-hello
 
-bash-hello/flake.nix:
+bash-hello:
 	nix flake new --template templates#bash-hello bash-hello
 	nix flake show ./bash-hello
 
-c-hello/flake.nix:
+c-hello:
 	nix flake new --template templates#c-hello c-hello
 	nix flake show ./c-hello
 
-compat/flake.nix:
+compat:
 	nix flake new --template templates#compat compat
 	nix flake show ./compat
 
+devshell:
+	nix flake new --template templates#devshell devshell
+	nix flake show ./devshell
+
 clean:
-	rm -rf flake.nix bash-hello c-hello
+	rm -rf flake.nix bash-hello c-hello compat devShell
