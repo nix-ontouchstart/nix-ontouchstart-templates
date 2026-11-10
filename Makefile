@@ -1,20 +1,27 @@
-all:	templates metadata run
-	
+all:	flakes templates metadata run
+
+flakes:	flake.nix bash-hello/flake.nix c-hello/flake.nix
+
 templates:
 	nix flake show templates
 
 flake.nix:
 	nix flake init --template templates#empty
 
-clean:
-	rm flake.nix
-
-metadata: flake.nix bash-hello/flake.nix
+metadata: flake.nix bash-hello/flake.nix c-hello/flake.nix
 	nix flake metadata 
 	nix flake metadata ./bash-hello
+	nix flake metadata ./c-hello
 
 run: bash-hello/flake.nix
 	nix run ./bash-hello
+	nix run ./c-hello
 
 bash-hello/flake.nix:
 	nix flake new --template templates#bash-hello bash-hello
+
+c-hello/flake.nix:
+	nix flake new --template templates#c-hello c-hello
+
+clean:
+	rm -rf flake.nix bash-hello c-hello
