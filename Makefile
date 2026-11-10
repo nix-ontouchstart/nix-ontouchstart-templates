@@ -7,6 +7,7 @@ templates:
 
 flake.nix:
 	nix flake init --template templates#empty
+	nix flake show
 
 metadata: flake.nix bash-hello/flake.nix c-hello/flake.nix
 	nix flake metadata 
@@ -19,9 +20,11 @@ run: bash-hello/flake.nix
 
 bash-hello/flake.nix:
 	nix flake new --template templates#bash-hello bash-hello
+	nix flake show ./bash-hello
 
 c-hello/flake.nix:
 	nix flake new --template templates#c-hello c-hello
+	nix flake show ./c-hello
 
 clean:
 	rm -rf flake.nix bash-hello c-hello
