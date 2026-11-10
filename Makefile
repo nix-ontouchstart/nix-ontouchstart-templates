@@ -16,6 +16,7 @@ metadata: templates
 run: metadata
 	nix run ./bash-hello
 	nix run ./c-hello
+	nix develop ./devshell --command hello
 
 bash-hello:
 	nix flake new --template templates#bash-hello bash-hello
