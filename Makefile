@@ -1,6 +1,6 @@
 all:	metadata run
 
-templates: flake.nix bash-hello c-hello compat devshell dotnet full python rust rust-web-server
+templates: flake.nix bash-hello c-hello compat devshell dotnet full python rust rust-web-server utils-generic
 	nix flake show templates
 
 flake.nix:
@@ -18,6 +18,7 @@ metadata: templates
 	nix flake metadata ./python
 	nix flake metadata ./rust
 	nix flake metadata ./rust-web-server
+	nix flake metadata ./utils-generic
 
 run: metadata
 	nix run ./bash-hello
@@ -61,5 +62,10 @@ rust-web-server:
 	nix flake new --template templates#rust-web-server rust-web-server
 	nix flake show ./rust-web-server
 
+utils-generic:
+	nix flake new --template templates#utils-generic utils-generic
+	nix flake show ./utils-generic
+
 clean:
-	rm -rf flake.nix bash-hello c-hello compat devShell dotnet full python rust rust-web-server
+	rm -rf flake.nix bash-hello c-hello compat devShell dotnet full python rust rust-web-server utils-generic
+
