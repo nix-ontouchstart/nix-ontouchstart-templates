@@ -27,8 +27,8 @@ run: metadata
 	nix run ./c-hello
 	nix develop ./devshell --command hello
 	cd python && nix develop --command poetry run python -m sample_package
-	cd typescript-p5js && nix develop --command pnpm --version
-	cd typescript-pnpm && nix develop --command pnpm --version
+	cd typescript-p5js && nix develop --command pnpm webpack
+	cd typescript-pnpm && nix develop --command pnpm webpack
 
 bash-hello:
 	nix flake new --template templates#bash-hello bash-hello
