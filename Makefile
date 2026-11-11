@@ -1,6 +1,6 @@
 all:	metadata run
 
-templates: flake.nix bash-hello c-hello compat devshell dotnet full ocaml python rust rust-web-server utils-generic typescript-p5js typescript-pnpm
+templates: flake.nix bash-hello c-hello compat devshell dotnet full ocaml python rust rust-web-server utils-generic typescript-p5js typescript-pnpm zig
 	nix flake show templates
 
 flake.nix:
@@ -22,15 +22,20 @@ metadata: templates
 	nix flake metadata ./utils-generic
 	nix flake metadata ./typescript-p5js
 	nix flake metadata ./typescript-pnpm
+	nix flake metadata ./zig
 
 run: metadata
 	nix run ./bash-hello
 	nix run ./c-hello
 	nix develop ./devshell --command hello
+	nix run ./ocaml
 	cd python && nix develop --command poetry run python -m sample_package
 	cd typescript-p5js && nix develop --command pnpm webpack
 	cd typescript-pnpm && nix develop --command pnpm webpack
-	nix run ./ocaml
+	nix run ./zig
+	cd zig && nix develop --command zig version
+	cd zig && nix develop --command zig zen
+	cd zig && nix develop --command zig build test
 
 bash-hello:
 	nix flake new --template templates#bash-hello bash-hello
@@ -83,7 +88,11 @@ typescript-p5js:
 typescript-pnpm:
 	nix flake new --template templates#typescript-pnpm typescript-pnpm
 	nix flake show ./typescript-pnpm
+	
+zig:
+	nix flake new --template github:nix-community/templates#zig zig
+	nix flake show ./zig
 
 clean:
-	rm -rf flake.nix bash-hello c-hello compat devshell dotnet full ocaml python rust rust-web-server utils-generic typescript-p5js typescript-pnpm
+	rm -rf flake.nix bash-hello c-hello compat devshell dotnet full ocaml python rust rust-web-server utils-generic typescript-p5js typescript-pnpm zig
 
